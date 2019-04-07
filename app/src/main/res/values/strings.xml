@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ConcertOne</string>
+    <string name="search_concert_by_artist">Search concert by artist</string>
+    <string name="search">Search</string>
 </resources>
