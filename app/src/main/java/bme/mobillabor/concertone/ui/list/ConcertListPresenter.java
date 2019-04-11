@@ -27,6 +27,9 @@ public final class ConcertListPresenter extends PresenterBase<ConcertListScreen>
             Collection<ConcertBaseData> filteredConcerts = concertAPIInteractor.getFilteredConcerts(searchExpression);
             screen.showConcerts(filteredConcerts);
         }
+        else  {
+            initialize();
+        }
     }
 
     public void delete(int id) {
