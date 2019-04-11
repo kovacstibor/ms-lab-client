@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.inject.Inject;
 
 import bme.mobillabor.concertone.model.ConcertBaseData;
+import bme.mobillabor.concertone.model.ConcertDetailedData;
 
 public class ConcertAPIInteractor {
 
@@ -25,5 +26,10 @@ public class ConcertAPIInteractor {
 
     public void deleteConcert(int id) {
         // TODO: implement
+    }
+
+    public ConcertDetailedData getConcertDetails(int id) {
+        // TODO: implement
+        return new ConcertDetailedData();
     }
 }
