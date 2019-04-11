@@ -44,4 +44,14 @@ public class ConcertAPIInteractor {
         // TODO: implement
         return new ConcertDetailedData();
     }
+
+    public boolean updateConcert(int id, ConcertDetailedData updatedConcertDetails) {
+        // TODO: implement
+        return true;
+    }
+
+    public boolean createConcert(ConcertDetailedData newConcertDetails) {
+        // TODO: implement
+        return true;
+    }
 }
