@@ -1,7 +1,5 @@
 package bme.mobillabor.concertone.ui.details;
 
-import android.util.Log;
-
 import javax.inject.Inject;
 
 import bme.mobillabor.concertone.interactor.ConcertAPIInteractor;
@@ -18,7 +16,6 @@ public class ConcertDetailsPresenter extends PresenterBase<ConcertDetailsScreen>
     }
 
     public void initialize(int id) {
-        Log.d("MyTag", Integer.toString(id));
         ConcertDetailedData concertDetails = concertAPIInteractor.getConcertDetails(id);
         screen.showConcertDetails(concertDetails);
     }

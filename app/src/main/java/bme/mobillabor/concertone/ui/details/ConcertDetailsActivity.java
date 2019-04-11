@@ -23,7 +23,7 @@ public class ConcertDetailsActivity extends AppCompatActivity implements Concert
         setContentView(R.layout.activity_concert_details);
         ConcertOneApplication.injector.inject(this);
 
-        concertId = savedInstanceState.getInt(ID_KEY);
+        concertId = getIntent().getIntExtra(ID_KEY, 0);
     }
 
     @Override
