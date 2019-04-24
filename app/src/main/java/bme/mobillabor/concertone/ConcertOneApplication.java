@@ -2,6 +2,7 @@ package bme.mobillabor.concertone;
 
 import android.app.Application;
 
+import bme.mobillabor.concertone.api.ApiModule;
 import bme.mobillabor.concertone.ui.UIModule;
 
 public class ConcertOneApplication extends Application {
@@ -13,6 +14,7 @@ public class ConcertOneApplication extends Application {
 
         injector = DaggerConcertOneApplicationComponent.builder()
                         .uIModule(new UIModule(this))
+                        .apiModule(new ApiModule())
                         .build();
     }
 }

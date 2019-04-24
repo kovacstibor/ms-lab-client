@@ -2,46 +2,76 @@ package bme.mobillabor.concertone.interactor;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
+import bme.mobillabor.concertone.ConcertOneApplication;
+import bme.mobillabor.concertone.api.ConcertApi;
 import bme.mobillabor.concertone.model.ConcertBaseData;
 import bme.mobillabor.concertone.model.ConcertDetailedData;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
 
 public class ConcertAPIInteractor {
 
+    private ConcertApi concertApi;
+
     @Inject
-    public ConcertAPIInteractor() {
+    public ConcertAPIInteractor(ConcertApi concertApi) {
+        this.concertApi = concertApi;
+        ConcertOneApplication.injector.inject(this);
     }
 
     public Collection<ConcertBaseData> getAllConcerts() {
-        // TODO: implement
-        return new ArrayList<>();
-//        ConcertBaseData sampleConcert = new ConcertBaseData();
-//        sampleConcert.setId(3);
-//        sampleConcert.setArtist("Iron Maiden");
-//        sampleConcert.setDate(new Date(2018, 8, 12));
-//        sampleConcert.setLocation("Sopron, VOLT Fesztivál");
-//        sampleConcert.setTicketPrice(10000.0d);
-//
-//
-//        ArrayList<ConcertBaseData> concerts = new ArrayList<>();
-//        concerts.add(sampleConcert);
-//        return concerts;
+        try {
+            Call<List<ConcertBaseData>> concertsCall = concertApi.getConcerts(null);
+            Response<List<ConcertBaseData>> concertsResponse = concertsCall.execute();
+            if (concertsResponse.code() != 200) {
+                throw new Exception("Unexpected error! The response status code is not 200.");
+            }
+            return concertsResponse.body();
+        } catch (Exception exception) {
+            return new ArrayList<>();
+        }
     }
 
     public Collection<ConcertBaseData> getFilteredConcerts(String filterExpression) {
-        // TODO: implement
-        return new ArrayList<>();
+        try {
+            Call<List<ConcertBaseData>> concertsCall = concertApi.getConcerts(filterExpression);
+            Response<List<ConcertBaseData>> concertsResponse = concertsCall.execute();
+            if (concertsResponse.code() != 200) {
+                throw new Exception("Unexpected error! The response status code is not 200.");
+            }
+            return concertsResponse.body();
+        } catch (Exception exception) {
+            return new ArrayList<>();
+        }
     }
 
     public void deleteConcert(int id) {
-        // TODO: implement
+        try {
+            Call<ResponseBody> deleteConcertCall = concertApi.deleteConcertById(id);
+            Response<ResponseBody> deleteConcertResponse = deleteConcertCall.execute();
+            if (deleteConcertResponse.code() != 200) {
+                throw new Exception("Unexpected error! The response status code is not 200.");
+            }
+        } catch (Exception exception) {
+
+        }
     }
 
     public ConcertDetailedData getConcertDetails(int id) {
-        // TODO: implement
-        return new ConcertDetailedData();
+        try {
+            Call<ConcertDetailedData> concertCall = concertApi.getConcertById(id);
+            Response<ConcertDetailedData> concertResponse = concertCall.execute();
+            if (concertResponse.code() != 200) {
+                throw new Exception("Unexpected error! The response status code is not 200.");
+            }
+            return concertResponse.body();
+        } catch (Exception exception) {
+            return new ConcertDetailedData();
+        }
     }
 }

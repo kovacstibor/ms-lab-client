@@ -91,9 +91,14 @@ public class ConcertListActivity extends AppCompatActivity implements ConcertLis
     }
 
     @Override
-    public void showConcerts(Collection<ConcertBaseData> concertsToShow) {
-        concertList.clear();
-        concertList.addAll(concertsToShow);
-        concertListAdapter.notifyDataSetChanged();
+    public void showConcerts(final Collection<ConcertBaseData> concertsToShow) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                concertList.clear();
+                concertList.addAll(concertsToShow);
+                concertListAdapter.notifyDataSetChanged();
+            }
+        });
     }
 }
