@@ -74,11 +74,21 @@ public class ConcertUpsertActivity extends AppCompatActivity implements ConcertU
 
     @Override
     public void fillActualConcertDetails(ConcertDetailedData concertDetails) {
-        // TODO: implement
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // TODO: implement
+            }
+        });
     }
 
     @Override
     public void upsertCompleted(boolean succeeded) {
-        // TODO: implement
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // TODO: implement
+            }
+        });
     }
 }

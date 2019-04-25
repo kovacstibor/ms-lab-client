@@ -46,6 +46,11 @@ public class ConcertDetailsActivity extends AppCompatActivity implements Concert
 
     @Override
     public void showConcertDetails(ConcertDetailedData concertDetails) {
-        // TODO: implement
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // TODO: implement
+            }
+        });
     }
 }

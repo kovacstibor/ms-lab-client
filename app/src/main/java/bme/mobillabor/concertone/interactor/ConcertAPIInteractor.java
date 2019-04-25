@@ -7,7 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import bme.mobillabor.concertone.ConcertOneApplication;
-import bme.mobillabor.concertone.api.ConcertApi;
+import bme.mobillabor.concertone.data.ConcertApi;
 import bme.mobillabor.concertone.model.ConcertBaseData;
 import bme.mobillabor.concertone.model.ConcertDetailedData;
 import okhttp3.ResponseBody;
@@ -64,24 +64,40 @@ public class ConcertAPIInteractor {
 
     public ConcertDetailedData getConcertDetails(int id) {
         try {
-            Call<ConcertDetailedData> concertCall = concertApi.getConcertById(id);
-            Response<ConcertDetailedData> concertResponse = concertCall.execute();
-            if (concertResponse.code() != 200) {
+            Call<ConcertDetailedData> concertDetailsCall = concertApi.getConcertById(id);
+            Response<ConcertDetailedData> concertDetailsResponse = concertDetailsCall.execute();
+            if (concertDetailsResponse.code() != 200) {
                 throw new Exception("Unexpected error! The response status code is not 200.");
             }
-            return concertResponse.body();
+            return concertDetailsResponse.body();
         } catch (Exception exception) {
             return new ConcertDetailedData();
         }
     }
 
     public boolean updateConcert(int id, ConcertDetailedData updatedConcertDetails) {
-        // TODO: implement
-        return true;
+        try {
+            Call<ResponseBody> updateConcertCall = concertApi.updateConcert(id, updatedConcertDetails);
+            Response<ResponseBody> updateConcertResponse = updateConcertCall.execute();
+            if (updateConcertResponse.code() != 200) {
+                throw new Exception("Unexpected error! The response status code is not 200.");
+            }
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
     }
 
     public boolean createConcert(ConcertDetailedData newConcertDetails) {
-        // TODO: implement
-        return true;
+        try {
+            Call<ResponseBody> createConcertCall = concertApi.createConcert(newConcertDetails);
+            Response<ResponseBody> createConcertResponse = createConcertCall.execute();
+            if (createConcertResponse.code() != 200) {
+                throw new Exception("Unexpected error! The response status code is not 200.");
+            }
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
     }
 }

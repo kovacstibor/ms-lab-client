@@ -1,4 +1,4 @@
-package bme.mobillabor.concertone.api;
+package bme.mobillabor.concertone.data;
 
 import java.util.List;
 
