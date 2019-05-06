@@ -40,6 +40,10 @@ public class ConcertBaseData {
     @SerializedName("ticketPrice")
     private Double ticketPrice = null;
 
+    @ColumnInfo(name = "genre")
+    @SerializedName("genre")
+    private String genre = null;
+
     /**
      * The unique identifier of the concert.
      * minimum: 0
@@ -137,5 +141,13 @@ public class ConcertBaseData {
         sb.append("  ticketPrice: ").append(ticketPrice).append("\n");
         sb.append("}\n");
         return sb.toString();
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 }

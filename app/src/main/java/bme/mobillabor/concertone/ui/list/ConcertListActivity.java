@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,10 +31,10 @@ public class ConcertListActivity extends AppCompatActivity implements ConcertLis
     private ConcertBaseDataAdapter concertListAdapter;
 
     private EditText etSearchExpression;
-    private Button btSearch;
+    private ImageView btSearch;
     private RecyclerView rvConcertList;
     private Toolbar tbToolbar;
-    private ImageButton ibAddConcert;
+    private ImageView ibAddConcert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -2,43 +2,77 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FEEDBE">
 
     <android.support.v7.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/list_toolbar"
+        android:padding="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
-
-        <ImageButton
-            android:id="@+id/btAddConcert"
-            android:layout_marginLeft="370dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_launcher_background"/>
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:background="#FD9927">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/img_calendar"
+                android:scaleType="fitCenter" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:layout_gravity="center_vertical"
+                android:textSize="24sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:text="@string/concerts" />
+            <ImageView
+                android:id="@+id/btAddConcert"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_add"/>
+        </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:background="#FD9927"
+        android:padding="4dp">
 
         <EditText
             android:id="@+id/etSearchExpression"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#DDDDDD"
             android:hint="@string/search_concert_by_artist" />
 
-        <Button
+        <ImageView
             android:id="@+id/btSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/search" />
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_search"/>
     </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvConcertList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:padding="4dp" />
 </LinearLayout>

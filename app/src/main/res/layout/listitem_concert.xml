@@ -2,20 +2,63 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:orientation="horizontal">
-    <TextView
-        android:id="@+id/list_item_artist"
-        android:layout_width="wrap_content"
+    android:orientation="horizontal"
+    android:layout_margin="4dp"
+    android:padding="4dp"
+    android:background="#FEEDBE">
+    <ImageView
+        android:id="@+id/list_item_image"
+        android:layout_width="0dp"
+        android:layout_height="84dp"
+        android:layout_weight="1" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/list_item_artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FD9927"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/list_item_date_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FD9927"
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+        <TextView
+            android:id="@+id/list_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FD9927"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:text="Test"/>
-    <ImageButton
-        android:id="@+id/list_item_delete"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_launcher_background" />
-    <ImageButton
-        android:id="@+id/list_item_edit"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_launcher_foreground" />
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/list_item_edit"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/img_edit" />
+        <ImageView
+            android:id="@+id/list_item_delete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_delete" />
+    </LinearLayout>
 </LinearLayout>

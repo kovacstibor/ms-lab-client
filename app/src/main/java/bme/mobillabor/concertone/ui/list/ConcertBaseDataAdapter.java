@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -20,16 +20,22 @@ public final class ConcertBaseDataAdapter extends RecyclerView.Adapter<ConcertBa
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        public final ImageView imMusicType;
         public final TextView tvArtist;
-        public final ImageButton ibDelete;
-        public final ImageButton ibEdit;
+        public final TextView tvDateLocation;
+        public final TextView tvPrice;
+
+        public final ImageView ibDelete;
+        public final ImageView ibEdit;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            imMusicType = itemView.findViewById(R.id.list_item_image);
             tvArtist = itemView.findViewById(R.id.list_item_artist);
+            tvDateLocation = itemView.findViewById(R.id.list_item_date_location);
+            tvPrice = itemView.findViewById(R.id.list_item_price);
             ibDelete = itemView.findViewById(R.id.list_item_delete);
             ibEdit = itemView.findViewById(R.id.list_item_edit);
-            // TODO: implement remaining properties
         }
     }
 
@@ -53,6 +59,8 @@ public final class ConcertBaseDataAdapter extends RecyclerView.Adapter<ConcertBa
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final ConcertBaseData item = items.get(i);
 
+        viewHolder.imMusicType.setImageResource(getImageResourceId(item.getGenre()));
+
         viewHolder.tvArtist.setText(item.getArtist());
         viewHolder.tvArtist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +70,8 @@ public final class ConcertBaseDataAdapter extends RecyclerView.Adapter<ConcertBa
                 owner.startActivity(intent);
             }
         });
+        viewHolder.tvPrice.setText(item.getTicketPrice().toString() + " Ft");
+        viewHolder.tvDateLocation.setText(ellipseText(item.getDate().substring(5, 10) + " " + item.getLocation(), 20));
 
         viewHolder.ibDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,12 +89,40 @@ public final class ConcertBaseDataAdapter extends RecyclerView.Adapter<ConcertBa
                 owner.startActivity(intent);
             }
         });
-
-        // TODO: set remaining view holder properties
     }
 
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    private int getImageResourceId(String genre) {
+        if (genre == null) {
+            return R.drawable.img_music_general;
+        }
+        if (genre.toUpperCase().contains("POP")) {
+            return R.drawable.img_music_pop;
+        }
+        if (genre.toUpperCase().contains("RAP")) {
+            return R.drawable.img_music_rap;
+        }
+        if (genre.toUpperCase().contains("DISCO")) {
+            return R.drawable.img_music_disco;
+        }
+        if (genre.toUpperCase().contains("ROCK")) {
+            return R.drawable.img_musis_rock;
+        }
+        if (genre.toUpperCase().contains("CLASSICAL")) {
+            return R.drawable.img_music_clasical;
+        }
+
+        return R.drawable.img_music_general;
+    }
+
+    private String ellipseText(String source, int size) {
+        if (source == null || source.length() <= size) {
+            return  source;
+        }
+        return source.substring(0, size) + "…";
     }
 }
