@@ -109,7 +109,7 @@ public final class ConcertBaseDataAdapter extends RecyclerView.Adapter<ConcertBa
         if (genre.toUpperCase().contains("DISCO")) {
             return R.drawable.img_music_disco;
         }
-        if (genre.toUpperCase().contains("ROCK")) {
+        if (genre.toUpperCase().contains("ROCK") || genre.toUpperCase().contains("METAL")) {
             return R.drawable.img_musis_rock;
         }
         if (genre.toUpperCase().contains("CLASSICAL")) {

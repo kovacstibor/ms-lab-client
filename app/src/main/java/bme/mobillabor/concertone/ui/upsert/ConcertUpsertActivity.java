@@ -4,6 +4,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.EditText;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -21,6 +29,13 @@ public class ConcertUpsertActivity extends AppCompatActivity implements ConcertU
     private int concertId;
     private boolean isEditing;
 
+    private EditText etArtist;
+    private EditText etLocation;
+    private DatePicker dpDate;
+    private EditText etPrice;
+    private EditText etFreeSpaces;
+    private CheckBox cbIsAccessible;
+    private EditText etGenre;
     private Button btnUpsert;
 
     @Override
@@ -34,13 +49,30 @@ public class ConcertUpsertActivity extends AppCompatActivity implements ConcertU
             concertId = getIntent().getIntExtra(ID_KEY, 0);
         }
 
-        // TODO: initialize UI
+        etArtist = findViewById(R.id.etUpsertArtist);
+        etLocation = findViewById(R.id.etUpsertLocation);
+        dpDate = findViewById(R.id.dpUpsertDate);
+        etPrice = findViewById(R.id.etUpsertPrice);
+        etFreeSpaces = findViewById(R.id.etUpsertPlaces);
+        cbIsAccessible = findViewById(R.id.cbUpsertIsAccessible);
+        etGenre = findViewById(R.id.etUpsertGenre);
         btnUpsert = findViewById(R.id.btnDoUpsert);
+
         btnUpsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: get actual values from UI
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(dpDate.getYear(), dpDate.getMonth(), dpDate.getDayOfMonth());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
                 ConcertDetailedData concertDetails = new ConcertDetailedData();
+                concertDetails.setArtist(etArtist.getText().toString());
+                concertDetails.setLocation(etLocation.getText().toString());
+                concertDetails.setDate(dateFormat.format(calendar.getTime()));
+                concertDetails.setTicketPrice(Double.parseDouble(etPrice.getText().toString()));
+                concertDetails.setNumberOfFreeSpaces(Integer.parseInt(etFreeSpaces.getText().toString()));
+                concertDetails.setIsAccessible(cbIsAccessible.isChecked());
+                concertDetails.setGenre(etGenre.getText().toString());
 
                 if (isEditing) {
                     concertUpsertPresenter.updateConcert(concertId, concertDetails);
@@ -67,17 +99,35 @@ public class ConcertUpsertActivity extends AppCompatActivity implements ConcertU
     @Override
     protected void onResume() {
         super.onResume();
-        if (!isEditing) {
+        if (isEditing) {
             concertUpsertPresenter.initializeForUpdate(concertId);
         }
     }
 
     @Override
-    public void fillActualConcertDetails(ConcertDetailedData concertDetails) {
+    public void fillActualConcertDetails(final ConcertDetailedData concertDetails) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                // TODO: implement
+                if (concertDetails == null) {
+                    return;
+                }
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                Date concertDate;
+                try {
+                    concertDate = dateFormat.parse(concertDetails.getDate());
+                } catch (ParseException e) {
+                    concertDate = new Date();
+                }
+
+                etArtist.setText(concertDetails.getArtist());
+                etLocation.setText(concertDetails.getLocation());
+                dpDate.updateDate(concertDate.getYear() + 1900, concertDate.getMonth(), concertDate.getDate());
+                etPrice.setText(concertDetails.getTicketPrice().toString());
+                etFreeSpaces.setText(concertDetails.getNumberOfFreeSpaces().toString());
+                cbIsAccessible.setChecked(concertDetails.getIsAccessible());
+                etGenre.setText(concertDetails.getGenre());
             }
         });
     }
@@ -87,7 +137,7 @@ public class ConcertUpsertActivity extends AppCompatActivity implements ConcertU
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                // TODO: implement
+                finish();
             }
         });
     }

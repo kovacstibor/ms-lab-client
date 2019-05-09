@@ -3,4 +3,14 @@
     <string name="search_concert_by_artist">Search concert by artist</string>
     <string name="search">Search</string>
     <string name="concerts">Koncertek</string>
+    <string name="concert_data">Koncert adatainak megadása</string>
+    <string name="artist">Előadó</string>
+    <string name="location">Helyszín</string>
+    <string name="price">Jegyár</string>
+    <string name="is_accessible">Akadálymentesített?</string>
+    <string name="genre">Műfaj</string>
+    <string name="save">Mentés</string>
+    <string name="number_of_free_spaces">Szabad helyek száma</string>
+    <string name="concert_details">Koncert részletei</string>
+    <string name="concertDate">Dátum</string>
 </resources>
