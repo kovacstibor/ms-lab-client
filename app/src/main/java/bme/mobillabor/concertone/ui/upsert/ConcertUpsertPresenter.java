@@ -5,16 +5,16 @@ import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
 
-import bme.mobillabor.concertone.interactor.ConcertAPIInteractor;
+import bme.mobillabor.concertone.interactor.IConcertAPIInteractor;
 import bme.mobillabor.concertone.model.ConcertDetailedData;
 import bme.mobillabor.concertone.ui.PresenterBase;
 
 public class ConcertUpsertPresenter extends PresenterBase<ConcertUpsertScreen> {
-    private final ConcertAPIInteractor concertAPIInteractor;
+    private final IConcertAPIInteractor concertAPIInteractor;
     private final Executor networkExecutor;
 
     @Inject
-    public ConcertUpsertPresenter(ConcertAPIInteractor concertAPIInteractor) {
+    public ConcertUpsertPresenter(IConcertAPIInteractor concertAPIInteractor) {
         this.concertAPIInteractor = concertAPIInteractor;
         this.networkExecutor = Executors.newFixedThreadPool(1);
     }

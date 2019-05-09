@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import bme.mobillabor.concertone.ConcertOneApplication;
 import bme.mobillabor.concertone.data.ConcertApi;
 import bme.mobillabor.concertone.model.ConcertBaseData;
 import bme.mobillabor.concertone.model.ConcertDetailedData;
@@ -14,14 +13,13 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class ConcertAPIInteractor {
+public class ConcertAPIInteractor implements IConcertAPIInteractor {
 
     private ConcertApi concertApi;
 
     @Inject
     public ConcertAPIInteractor(ConcertApi concertApi) {
         this.concertApi = concertApi;
-        ConcertOneApplication.injector.inject(this);
     }
 
     public Collection<ConcertBaseData> getAllConcerts() {

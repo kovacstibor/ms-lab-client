@@ -10,4 +10,6 @@ public abstract class PresenterBase<S extends IScreen> {
     public void detachScreen() {
         this.screen = null;
     }
+
+    public S getScreen() { return screen; }
 }
