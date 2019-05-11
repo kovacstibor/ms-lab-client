@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import bme.mobillabor.concertone.data.ConcertBaseDataDao;
 import bme.mobillabor.concertone.data.ConcertDb;
@@ -12,12 +13,42 @@ import bme.mobillabor.concertone.interactor.IConcertAPIInteractor;
 import bme.mobillabor.concertone.model.ConcertBaseData;
 import bme.mobillabor.concertone.stub.ConcertListScreenObserver;
 import bme.mobillabor.concertone.ui.list.ConcertListPresenter;
+import bme.mobillabor.concertone.ui.list.ConcertListScreen;
 import bme.mobillabor.concertone.utility.INetworkStateProvider;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class UT_ListPresenter_Search {
+    @Test
+    public void screen_called() throws InterruptedException {
+        // Arrange
+        Collection<ConcertBaseData> concerts = new ArrayList<>();
+        ConcertListScreen screen = mock(ConcertListScreen.class);
+
+        IConcertAPIInteractor concertApi = mock(IConcertAPIInteractor.class);
+        when(concertApi.getFilteredConcerts("queen")).thenReturn(concerts);
+
+        ConcertDb concertDb = mock(ConcertDb.class);
+        when(concertDb.concertBaseDataDao()).thenReturn(mock(ConcertBaseDataDao.class));
+
+        INetworkStateProvider networkStateProvider = mock(INetworkStateProvider.class);
+        when(networkStateProvider.isNetworkAvailable()).thenReturn(true);
+
+        ConcertListPresenter listPresenter = new ConcertListPresenter(concertApi, concertDb, networkStateProvider);
+
+        // Act
+        listPresenter.attachScreen(screen);
+        listPresenter.search("queen");
+        Thread.sleep(100);
+        listPresenter.detachScreen();
+
+        // Assert
+        verify(screen, times(1)).showConcerts(concerts);
+    }
+
     @Test
     public void fromNetwork_existingConcert() throws InterruptedException {
         // Arrange
