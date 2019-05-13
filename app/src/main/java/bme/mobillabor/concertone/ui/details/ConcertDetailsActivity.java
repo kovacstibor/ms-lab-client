@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.text.SimpleDateFormat;
 
 import javax.inject.Inject;
@@ -15,6 +17,8 @@ import bme.mobillabor.concertone.model.ConcertDetailedData;
 
 public class ConcertDetailsActivity extends AppCompatActivity implements ConcertDetailsScreen {
     public static final String ID_KEY = "CONCERT_ID_KEY";
+
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Inject
     public ConcertDetailsPresenter concertDetailsPresenter;
@@ -34,6 +38,7 @@ public class ConcertDetailsActivity extends AppCompatActivity implements Concert
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_concert_details);
         ConcertOneApplication.injector.inject(this);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         ivGenre = findViewById(R.id.ivDetailsGenre);
         tvArtist = findViewById(R.id.tvDetailsArtist);

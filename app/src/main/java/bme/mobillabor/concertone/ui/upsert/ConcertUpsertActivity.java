@@ -8,6 +8,8 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,6 +24,8 @@ import bme.mobillabor.concertone.model.ConcertDetailedData;
 public class ConcertUpsertActivity extends AppCompatActivity implements ConcertUpsertScreen{
     public static final String ID_KEY = "CONCERT_ID_KEY";
     public static final String IS_EDIT_KEY = "IS_EDIT_KEY";
+
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Inject
     public ConcertUpsertPresenter concertUpsertPresenter;
@@ -43,6 +47,7 @@ public class ConcertUpsertActivity extends AppCompatActivity implements ConcertU
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_concert_upsert);
         ConcertOneApplication.injector.inject(this);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         isEditing = getIntent().getBooleanExtra(IS_EDIT_KEY, false);
         if (isEditing) {

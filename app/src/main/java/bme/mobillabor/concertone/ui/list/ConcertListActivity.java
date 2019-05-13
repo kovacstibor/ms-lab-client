@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -24,6 +26,8 @@ import bme.mobillabor.concertone.model.ConcertBaseData;
 import bme.mobillabor.concertone.ui.upsert.ConcertUpsertActivity;
 
 public class ConcertListActivity extends AppCompatActivity implements ConcertListScreen {
+
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Inject
     public ConcertListPresenter concertListPresenter;
@@ -41,6 +45,7 @@ public class ConcertListActivity extends AppCompatActivity implements ConcertLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_concert_list);
         ConcertOneApplication.injector.inject(this);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         concertListAdapter = new ConcertBaseDataAdapter(concertList, this);
 
         etSearchExpression = findViewById(R.id.etSearchExpression);
@@ -49,6 +54,11 @@ public class ConcertListActivity extends AppCompatActivity implements ConcertLis
         btSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "ITEM_1");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Search");
+                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "text");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
                 concertListPresenter.search(etSearchExpression.getText().toString());
             }
         });
@@ -66,6 +76,12 @@ public class ConcertListActivity extends AppCompatActivity implements ConcertLis
         ibAddConcert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "ITEM_2");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Create");
+                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "text");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
                 Intent intent = new Intent(ConcertListActivity.this, ConcertUpsertActivity.class);
                 intent.putExtra(ConcertUpsertActivity.IS_EDIT_KEY, false);
                 startActivity(intent);

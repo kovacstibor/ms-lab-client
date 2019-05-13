@@ -1,5 +1,7 @@
 package bme.mobillabor.concertone.ui.list;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.Executor;
