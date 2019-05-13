@@ -49,6 +49,10 @@ public class ConcertUpsertActivity extends AppCompatActivity implements ConcertU
         ConcertOneApplication.injector.inject(this);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
+        if (true) {
+            throw new NullPointerException("TEST EXCEPTION");
+        }
+
         isEditing = getIntent().getBooleanExtra(IS_EDIT_KEY, false);
         if (isEditing) {
             concertId = getIntent().getIntExtra(ID_KEY, 0);
